@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import TodoList from "./TodoList/TodoList";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { TostProvider, TodoProvider } from "./TodoList/context/TodoContext";
+import MySnackbar from "./TodoList/MySnackbar";
+const theme = createTheme({
+  typography: {
+    fontFamily: ["Alexandria"],
+  },
+  palette: {
+    primary: {
+      main: "#dd2c00",
+    },
+  },
+});
 
 function App() {
+  // pureComponent
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <ThemeProvider theme={theme}>
+      <TodoProvider>
+        <div
+          className="App"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            direction: "rtl",
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <TostProvider>
+            <MySnackbar />
+
+            <TodoList />
+          </TostProvider>
+        </div>
+      </TodoProvider>
+    </ThemeProvider>
   );
 }
+
+
 
 export default App;
